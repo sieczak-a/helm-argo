@@ -7,7 +7,7 @@ spec:
   description: Projekt dla Bitnami PostgreSQL
   sourceRepos:
     - 'https://charts.bitnami.com/bitnami'
-    - 'git@github.com:sieczak-a/helm-argo.git'
+    - 'https://github.com/sieczak-a/helm-argo.git'
   destinations:
     - namespace: postgresql
       server: https://kubernetes.default.svc
