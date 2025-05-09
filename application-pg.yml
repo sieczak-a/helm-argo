@@ -5,14 +5,15 @@ metadata:
   namespace: argocd
 spec:
   project: postgresql-project
-  source:
-    repoURL: https://charts.bitnami.com/bitnami
-    chart: postgresql
-    targetRevision: 15.2.6  # lub latest
-    helm:
-      releaseName: postgresql
-      valueFiles:
-        - $values/values-pg.yml
+  sources:
+    - repoURL: https://charts.bitnami.com/bitnami
+      chart: postgresql
+      targetRevision: 15.2.6  # lub latest
+      helm:
+        releaseName: postgresql
+    - repoURL: 'https://github.com/sieczak-a/helm-argo.git'
+      targetRevision: HEAD  # lub konkretny branch/tag/commit
+      ref: values-pg
   destination:
     server: https://kubernetes.default.svc
     namespace: postgresql
@@ -22,7 +23,3 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
-  sources:
-    - repoURL: 'git@github.com:sieczak-a/helm-argo.git'
-      targetRevision: HEAD  # lub konkretny branch/tag/commit
-      ref: values
