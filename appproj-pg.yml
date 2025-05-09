@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: postgresql-project
+  namespace: argocd
+spec:
+  description: Projekt dla Bitnami PostgreSQL
+  sourceRepos:
+    - 'https://charts.bitnami.com/bitnami'
+    - 'git@github.com:sieczak-a/helm-argo.git'
+  destinations:
+    - namespace: postgresql
+      server: https://kubernetes.default.svc
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
