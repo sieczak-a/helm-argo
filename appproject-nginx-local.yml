@@ -1,0 +1,15 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: nginx-project-local
+  namespace: argocd
+spec:
+  description: Projekt dla helm chartu lokalnego
+  sourceRepos:
+    - 'https://github.com/sieczak-a/helm-argo.git'
+  destinations:
+    - namespace: nginx-local
+      server: https://kubernetes.default.svc
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
