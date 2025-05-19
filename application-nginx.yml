@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nginx-app-local
+  namespace: argocd
+spec:
+  project: nginx-project-local
+  source:
+    repoURL: hhttps://github.com/sieczak-a/helm-argo
+    path: nginx-local/
+    helm:
+      valueFiles:
+        - values.yaml
+      releaseName: nginx-app-local
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: nginx-local
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
